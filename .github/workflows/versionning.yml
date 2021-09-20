@@ -1,9 +1,7 @@
 name: Versionning CI
 
 on:
-  push:
-    tags:
-      - 'v*.*.*'
+  push: "master"
 
 jobs:
   versionning:
