@@ -27,7 +27,7 @@ jobs:
         run: yarn install
 
       - name: Create release
-        if: |
+        run: |
           if [[ ${{ github.event.ref }} =~ ^refs/tags/v[1-9]+\.0+\.0+$ ]]; then
             standard-version --release-as major
           elif [[ ${{ github.event.ref }} =~ ^refs/tags/v[0-9]+\.[1-9]+\.0+$ ]]; then
