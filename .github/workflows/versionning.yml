@@ -1,0 +1,38 @@
+name: Versionning CI
+
+on:
+  push:
+    tags:
+      - 'v*.*.*'
+
+jobs:
+  versionning:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Cache node_modules
+        uses: actions/cache@v2
+        with:
+          path: '**/node_modules'
+          key: ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
+
+      - name: Setup Node.js 14.x
+        uses: actions/setup-node@v2
+        with:
+          node-version: 14.x
+
+      - name: Install dependencies
+        run: yarn install
+
+      - name: Create release
+        if: |
+          if [[ ${{ github.event.ref }} =~ ^refs/tags/v[1-9]+\.0+\.0+$ ]]; then
+            standard-version --release-as major
+          elif [[ ${{ github.event.ref }} =~ ^refs/tags/v[0-9]+\.[1-9]+\.0+$ ]]; then
+            standard-version --release-as minor
+          elif [[ ${{ github.event.ref }} =~ ^refs/tags/v[0-9]+\.[0-9]+\.[1-9]+$ ]]; then
+            standard-version --release-as patch
+          fi
+
