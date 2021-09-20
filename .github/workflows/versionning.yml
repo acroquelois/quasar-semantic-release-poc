@@ -2,8 +2,8 @@ name: Versionning CI
 
 on:
   push:
-#    tags:
-#      - 'v*.*.*'
+    tags:
+      - 'v*.*.*'
 
 jobs:
   versionning:
@@ -26,14 +26,17 @@ jobs:
       - name: Install dependencies
         run: yarn install
 
-      - name: Create release
-        run: npm install -g standard-version; standard-version --release-as patch
+      - name: Config git
+        run: git status
 
-#          if [[ ${{ github.event.ref }} =~ ^refs/tags/v[1-9]+\.0+\.0+$ ]]; then
-#            standard-version --release-as major
-#          elif [[ ${{ github.event.ref }} =~ ^refs/tags/v[0-9]+\.[1-9]+\.0+$ ]]; then
-#            standard-version --release-as minor
-#          elif [[ ${{ github.event.ref }} =~ ^refs/tags/v[0-9]+\.[0-9]+\.[1-9]+$ ]]; then
-#            standard-version --release-as patch
-#          fi
+      - name: Create release
+        run: |
+          npm install -g standard-version;
+          if [[ ${{ github.event.ref }} =~ ^refs/tags/v[1-9]+\.0+\.0+$ ]]; then
+            standard-version --release-as major
+          elif [[ ${{ github.event.ref }} =~ ^refs/tags/v[0-9]+\.[1-9]+\.0+$ ]]; then
+            standard-version --release-as minor
+          elif [[ ${{ github.event.ref }} =~ ^refs/tags/v[0-9]+\.[0-9]+\.[1-9]+$ ]]; then
+            standard-version --release-as patch
+          fi
 
