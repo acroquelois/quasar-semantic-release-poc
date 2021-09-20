@@ -43,5 +43,5 @@ jobs:
           fi
 
       - name: Git push
-        run: git push --follow-tags origin HEAD
+        run: git push --follow-tags origin master
 
