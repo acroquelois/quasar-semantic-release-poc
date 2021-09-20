@@ -2,8 +2,8 @@ name: Versionning CI
 
 on:
   push:
-    tags:
-      - 'v*.*.*'
+#    tags:
+#      - 'v*.*.*'
 
 jobs:
   versionning:
@@ -27,7 +27,7 @@ jobs:
         run: yarn install
 
       - name: Create release
-        run: ls; standard-version --release-as patch
+        run: npm install -g standard-version; standard-version --release-as patch
 
 #          if [[ ${{ github.event.ref }} =~ ^refs/tags/v[1-9]+\.0+\.0+$ ]]; then
 #            standard-version --release-as major
