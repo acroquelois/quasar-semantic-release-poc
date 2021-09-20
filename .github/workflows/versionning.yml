@@ -34,7 +34,7 @@ jobs:
       - name: Create release
         run: |
           npm install -g standard-version
-          standard-version --release-as ${{ github.event.ref }} --skip.tag
+          standard-version --release-as ${{ github.event.ref.replace(/\/refs\/tags\//, '') }} --skip.tag
 
       - name: Git push
         run: git push --follow-tags origin HEAD:master
