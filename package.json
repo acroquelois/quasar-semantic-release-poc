@@ -1,6 +1,6 @@
 {
   "name": "quasar-semantic-release-poc",
-  "version": null,
+  "version": "0.0.15",
   "description": "A Quasar Framework app",
   "productName": "Quasar App",
   "author": "acroquelois",
