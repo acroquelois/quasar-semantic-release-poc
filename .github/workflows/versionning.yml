@@ -9,9 +9,6 @@ jobs:
   versionning:
     runs-on: ubuntu-latest
     steps:
-      - name: Extract tag name
-        run: echo ${{ github.event.ref##*/ }}
-
       - name: Checkout
         uses: actions/checkout@v2
 
@@ -28,7 +25,9 @@ jobs:
       - name: Create release
         run: |
           npm install -g standard-version
-          standard-version --release-as ${{ steps.tag.outputs.result }} --skip.tag
+          standard-version --release-as ${TAG_NAME##*/} --skip.tag
+        env:
+          TAG_NAME: ${{ github.event.ref }}
 
       - name: Git push
         run: git push --follow-tags origin HEAD:master
