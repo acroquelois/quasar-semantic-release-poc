@@ -1,3 +1,5 @@
+[![Versionning CI](https://github.com/acroquelois/quasar-semantic-release-poc/actions/workflows/versionning.yml/badge.svg)](https://github.com/acroquelois/quasar-semantic-release-poc/actions/workflows/versionning.yml)
+
 # Quasar semantic versionning automation
 
 This repository is a scaffold of quasar app with automatic semantic version on git tag changing
